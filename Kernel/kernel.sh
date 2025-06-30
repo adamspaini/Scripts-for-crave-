@@ -2,7 +2,7 @@
 #
 # Compile script for Stone Kernel
 # Credits to @enamulhasanabid for base script
-# Modified to prompt for Clang URL, kernel source URL, branch, and directory interactively
+# Modified to prompt for Clang URL (with default fallback), kernel source URL, branch, and directory interactively
 # Added toolchain validation to fix ld.lld not found error
 
 set -e
@@ -10,9 +10,16 @@ set -e
 # =============================================
 # CONFIGURATION
 # =============================================
-# Prompt for Clang URL
-echo "Enter the Clang toolchain URL (e.g., https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379/-/archive/15.0/android_prebuilts_clang_host_linux-x86_clang-r547379-15.0.tar.gz):"
+# Default Clang URL
+DEFAULT_CLANG_URL="https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379/-/archive/15.0/android_prebuilts_clang_host_linux-x86_clang-r547379-15.0.tar.gz"
+
+# Prompt for Clang URL with default option
+echo "Enter the Clang toolchain URL (press Enter for default: $DEFAULT_CLANG_URL):"
 read -r CLANG_URL
+if [ -z "$CLANG_URL" ]; then
+    echo "No URL provided, using default Clang URL: $DEFAULT_CLANG_URL"
+    CLANG_URL="$DEFAULT_CLANG_URL"
+fi
 if [ -z "$CLANG_URL" ]; then
     echo "Error: Clang URL cannot be empty!"
     exit 1
