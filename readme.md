@@ -1,6 +1,13 @@
-<h1 align="center"> 😏 Android 15 Scripts 🧐 </h1>
+<h1 align="center"> 😏 Crave Scripts 🧐 </h1>
 
 # LineageOS Command:
 ```
 crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/15/Crave/lineage.sh | bash"
+```
+
+<h1 align="center"> 😏 Regular Scripts 🧐 </h1>
+
+# Kernel Command:
+```
+curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/15/Kernel/kernel.sh | bash
 ```
