@@ -2,15 +2,43 @@
 #
 # Compile script for Stone Kernel
 # Credits to @enamulhasanabid for base script
+# Modified to prompt for Clang URL, kernel source URL, branch, and directory interactively
+# Added toolchain validation to fix ld.lld not found error
 
 set -e
 
 # =============================================
 # CONFIGURATION
 # =============================================
-KERNEL_REPO="https://github.com/kamikaonashi/private_kernel_stone.git"
-KERNEL_BRANCH="16"
-KERNEL_DIR="private_kernel_stone"
+# Prompt for Clang URL
+echo "Enter the Clang toolchain URL (e.g., https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379/-/archive/15.0/android_prebuilts_clang_host_linux-x86_clang-r547379-15.0.tar.gz):"
+read -r CLANG_URL
+if [ -z "$CLANG_URL" ]; then
+    echo "Error: Clang URL cannot be empty!"
+    exit 1
+fi
+
+# Prompt for kernel source details
+echo "Enter the kernel repository URL (e.g., https://github.com/user/kernel.git):"
+read -r KERNEL_REPO
+if [ -z "$KERNEL_REPO" ]; then
+    echo "Error: Kernel repository URL cannot be empty!"
+    exit 1
+fi
+
+echo "Enter the kernel branch (e.g., main):"
+read -r KERNEL_BRANCH
+if [ -z "$KERNEL_BRANCH" ]; then
+    echo "Error: Kernel branch cannot be empty!"
+    exit 1
+fi
+
+echo "Enter the kernel directory name (e.g., my_kernel):"
+read -r KERNEL_DIR
+if [ -z "$KERNEL_DIR" ]; then
+    echo "Error: Kernel directory name cannot be empty!"
+    exit 1
+fi
 
 ANYKERNEL_REPO="https://github.com/osm0sis/AnyKernel3.git"
 ANYKERNEL_DIR="$(pwd)/AnyKernel3"
@@ -18,9 +46,6 @@ ANYKERNEL_DIR="$(pwd)/AnyKernel3"
 DEVICE="stone"
 OUTPUT_DIR="$(pwd)/out"
 ZIP_NAME="stone-kernel-$(date +%Y%m%d-%H%M).zip"
-
-# Toolchain (AOSP Clang 21+ for Android 15)
-CLANG_URL="https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379/-/archive/15.0/android_prebuilts_clang_host_linux-x86_clang-r547379-15.0.tar.gz"
 CLANG_DIR="$(pwd)/clang"
 
 # Configuration
@@ -70,19 +95,36 @@ mkdir -p "$OUTPUT_DIR"
 # TOOLCHAIN
 # =============================================
 if [ ! -d "$CLANG_DIR" ]; then
-    echo "Downloading and extracting Clang toolchain..."
+    echo "Downloading and extracting Clang toolchain from $CLANG_URL..."
     mkdir -p "$CLANG_DIR"
     curl -L "$CLANG_URL" | tar xz -C "$CLANG_DIR" --strip-components=1
 fi
 
+# Verify toolchain binaries
+echo "Verifying Clang toolchain binaries..."
+for TOOL in clang ld.lld llvm-ar llvm-nm llvm-strip llvm-objcopy llvm-objdump; do
+    if [ ! -f "$CLANG_DIR/bin/$TOOL" ]; then
+        echo "Error: $TOOL not found in $CLANG_DIR/bin!"
+        echo "Please ensure the Clang toolchain URL is correct and the archive contains all required binaries."
+        exit 1
+    fi
+done
+
 export PATH="$CLANG_DIR/bin:$PATH"
 echo "Toolchain path: $CLANG_DIR"
+
+# Verify ld.lld is accessible
+if ! command -v ld.lld >/dev/null 2>&1; then
+    echo "Error: ld.lld not found in PATH after setting up toolchain!"
+    echo "PATH: $PATH"
+    exit 1
+fi
 
 # =============================================
 # KERNEL SOURCE
 # =============================================
 if [ ! -d "$KERNEL_DIR" ]; then
-    echo "Cloning kernel source..."
+    echo "Cloning kernel source from $KERNEL_REPO (branch: $KERNEL_BRANCH)..."
     git clone --depth=1 -b "$KERNEL_BRANCH" "$KERNEL_REPO" "$KERNEL_DIR"
 else
     echo "Updating kernel source..."
