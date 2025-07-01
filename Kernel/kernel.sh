@@ -1,66 +1,38 @@
 #!/bin/bash
 #
-# Compile script for Stone Kernel
+# Stone Kernel Compile Script
 # Modified from original by @enamulhasanabid
+# Enhanced for clean output and readable code structure
 #
 
 set -e
 
-# Default Clang URL
+# ---------------------------------------------
+# Configuration Variables
+# ---------------------------------------------
 DEFAULT_CLANG_URL="https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r547379/-/archive/15.0/android_prebuilts_clang_host_linux-x86_clang-r547379-15.0.tar.gz"
+ANYKERNEL_REPO="https://github.com/osm0sis/AnyKernel3.git"
 
-# Prompt for Clang URL
-echo "Enter Clang toolchain URL (press Enter for default: $DEFAULT_CLANG_URL):"
-read -r CLANG_URL
-CLANG_URL=${CLANG_URL:-$DEFAULT_CLANG_URL}
-if [ -z "$CLANG_URL" ]; then
-    echo "Error: Clang URL cannot be empty!"
-    exit 1
-fi
-
-# Prompt for kernel source details
-echo "Enter kernel repository URL (e.g., https://github.com/user/kernel.git):"
-read -r KERNEL_REPO
-if [ -z "$KERNEL_REPO" ]; then
-    echo "Error: Kernel repository URL cannot be empty!"
-    exit 1
-fi
-
-echo "Enter kernel branch (e.g., main):"
-read -r KERNEL_BRANCH
-if [ -z "$KERNEL_BRANCH" ]; then
-    echo "Error: Kernel branch cannot be empty!"
-    exit 1
-fi
-
-echo "Enter kernel directory name (e.g., my_kernel):"
-read -r KERNEL_DIR_NAME
-if [ -z "$KERNEL_DIR_NAME" ]; then
-    echo "Error: Kernel directory name cannot be empty!"
-    exit 1
-fi
-
-# Directory setup
+# Directory paths
 SCRIPT_DIR="$(pwd)"
-KERNEL_DIR="${SCRIPT_DIR}/${KERNEL_DIR_NAME}"
+KERNEL_DIR="${SCRIPT_DIR}/kernel_source"
 ANYKERNEL_DIR="${SCRIPT_DIR}/AnyKernel3"
 OUTPUT_DIR="${SCRIPT_DIR}/out"
 CLANG_DIR="${SCRIPT_DIR}/clang"
 ZIP_NAME="stone-kernel-$(date +%Y%m%d-%H%M).zip"
-ANYKERNEL_REPO="https://github.com/osm0sis/AnyKernel3.git"
 
-# Build configuration
+# Build environment
 export KBUILD_BUILD_USER="android-build"
 export KBUILD_BUILD_HOST="localhost"
 export SOURCE_DATE_EPOCH=$(date +%s)
 export BUILD_REPRODUCIBLE=1
 
-# CPU allocation (80% of available cores)
+# CPU allocation (80% of cores)
 TOTAL_CORES=$(nproc)
 JOBS=$(( TOTAL_CORES * 8 / 10 ))
 JOBS=$(( JOBS < 1 ? 1 : JOBS ))
 
-# AnyKernel3 configuration
+# AnyKernel3 settings
 AK3_KERNEL_STRING="Darkmoon"
 AK3_DO_DEVICECHECK=1
 AK3_DEVICE_NAME1="moonstone"
@@ -68,14 +40,65 @@ AK3_DEVICE_NAME2="sunstone"
 AK3_DEVICE_NAME3="stone"
 AK3_DO_CLEANUP=1
 
-# Pre-build setup
-echo "=== Starting Kernel Build ==="
+# Start build timer
+START_TIME=$(date +%s)
+
+# ---------------------------------------------
+# User Input Prompts
+# ---------------------------------------------
+echo "============================================="
+echo " Stone Kernel Build Script"
+echo "============================================="
+echo
+echo "Enter Clang toolchain URL (press Enter for default):"
+echo "Default: $DEFAULT_CLANG_URL"
+read -r CLANG_URL
+CLANG_URL=${CLANG_URL:-$DEFAULT_CLANG_URL}
+if [ -z "$CLANG_URL" ]; then
+    echo "Error: Clang URL cannot be empty!"
+    exit 1
+fi
+
+echo
+echo "Enter kernel repository URL (e.g., https://github.com/user/kernel.git):"
+read -r KERNEL_REPO
+if [ -z "$KERNEL_REPO" ]; then
+    echo "Error: Kernel repository URL cannot be empty!"
+    exit 1
+fi
+
+echo
+echo "Enter kernel branch (e.g., main):"
+read -r KERNEL_BRANCH
+if [ -z "$KERNEL_BRANCH" ]; then
+    echo "Error: Kernel branch cannot be empty!"
+    exit 1
+fi
+
+echo
+echo "Enter kernel directory name (e.g., my_kernel):"
+read -r KERNEL_DIR_NAME
+if [ -z "$KERNEL_DIR_NAME" ]; then
+    echo "Error: Kernel directory name cannot be empty!"
+    exit 1
+fi
+KERNEL_DIR="${SCRIPT_DIR}/${KERNEL_DIR_NAME}"
+
+# ---------------------------------------------
+# Build Setup
+# ---------------------------------------------
+echo
+echo "============================================="
+echo " Build Information"
+echo "============================================="
 echo "Device: stone"
-echo "Using CPU Cores: $JOBS / $TOTAL_CORES"
+echo "CPU Cores: $JOBS / $TOTAL_CORES"
 echo "Build User: $KBUILD_BUILD_USER"
 echo "Build Host: $KBUILD_BUILD_HOST"
+echo "Output ZIP: $ZIP_NAME"
+echo "============================================="
 
-# Check for required commands
+# Check required commands
 for cmd in git curl tar unzip ldconfig make; do
     if ! command -v "$cmd" &> /dev/null; then
         echo "Error: Required command '$cmd' not found."
@@ -84,11 +107,18 @@ for cmd in git curl tar unzip ldconfig make; do
 done
 
 # Clean previous builds
+echo
 echo "Cleaning previous build artifacts..."
 rm -rf "$OUTPUT_DIR" "$ANYKERNEL_DIR"
 mkdir -p "$OUTPUT_DIR"
 
-# Toolchain setup
+# ---------------------------------------------
+# Toolchain Setup
+# ---------------------------------------------
+echo
+echo "============================================="
+echo " Setting Up Toolchain"
+echo "============================================="
 if [ ! -d "$CLANG_DIR" ]; then
     echo "Downloading and extracting Clang toolchain..."
     mkdir -p "$CLANG_DIR"
@@ -105,15 +135,22 @@ fi
 
 # Verify toolchain binaries
 echo "Verifying Clang toolchain..."
-for TOOL in clang ld.lld llvm-ar llvm-nm llvm-strip llvm-objcopy llvm-objdump; do
-    if [ ! -f "$CLANG_DIR/bin/$TOOL" ]; then
-        echo "Error: $TOOL not found in $CLANG_DIR/bin!"
+for tool in clang ld.lld llvm-ar llvm-nm llvm-strip llvm-objcopy llvm-objdump; do
+    if [ ! -f "$CLANG_DIR/bin/$tool" ]; then
+        echo "Error: $tool not found in $CLANG_DIR/bin!"
         exit 1
     fi
 done
 export PATH="$CLANG_DIR/bin:$PATH"
+echo "Toolchain path: $CLANG_DIR"
 
-# Kernel source setup
+# ---------------------------------------------
+# Kernel Source Setup
+# ---------------------------------------------
+echo
+echo "============================================="
+echo " Preparing Kernel Source"
+echo "============================================="
 if [ ! -d "$KERNEL_DIR" ]; then
     echo "Cloning kernel source from $KERNEL_REPO (branch: $KERNEL_BRANCH)..."
     git clone --depth=1 -b "$KERNEL_BRANCH" "$KERNEL_REPO" "$KERNEL_DIR"
@@ -126,11 +163,17 @@ else
     cd ..
 fi
 
-# AnyKernel3 setup
-echo "Setting up AnyKernel3..."
+# ---------------------------------------------
+# AnyKernel3 Setup
+# ---------------------------------------------
+echo
+echo "============================================="
+echo " Configuring AnyKernel3"
+echo "============================================="
+echo "Cloning AnyKernel3 repository..."
 git clone --depth=1 "$ANYKERNEL_REPO" "$ANYKERNEL_DIR"
 
-echo "Configuring AnyKernel3..."
+echo "Generating AnyKernel3 configuration..."
 cat > "$ANYKERNEL_DIR/anykernel.sh" <<EOF
 #!/bin/bash
 
@@ -158,7 +201,13 @@ flash_boot;
 EOF
 chmod +x "$ANYKERNEL_DIR/anykernel.sh"
 
-# Build configuration
+# ---------------------------------------------
+# Kernel Compilation
+# ---------------------------------------------
+echo
+echo "============================================="
+echo " Building Kernel"
+echo "============================================="
 cd "$KERNEL_DIR"
 echo "Configuring kernel..."
 export ARCH=arm64
@@ -183,8 +232,7 @@ git reset --hard
 make O="$OUTPUT_DIR" stone_defconfig
 echo 'CONFIG_LOCALVERSION="-secure"' >> "$OUTPUT_DIR/.config"
 
-# Compilation
-echo "Compiling kernel..."
+echo "Compiling kernel with $JOBS cores..."
 make O="$OUTPUT_DIR" -j"$JOBS" \
     LOCALVERSION= \
     KBUILD_BUILD_USER="$KBUILD_BUILD_USER" \
@@ -197,15 +245,33 @@ if [ ! -f "$IMAGE" ]; then
     exit 1
 fi
 
+# ---------------------------------------------
 # Packaging
-echo "Preparing flashable ZIP..."
+# ---------------------------------------------
+echo
+echo "============================================="
+echo " Creating Flashable ZIP"
+echo "============================================="
+echo "Copying build artifacts..."
 cp "$IMAGE" "$ANYKERNEL_DIR/"
 [ -f "$OUTPUT_DIR/arch/arm64/boot/dtbo.img" ] && cp "$OUTPUT_DIR/arch/arm64/boot/dtbo.img" "$ANYKERNEL_DIR/"
 [ -f "$OUTPUT_DIR/arch/arm64/boot/dtb.img" ] && cp "$OUTPUT_DIR/arch/arm64/boot/dtb.img" "$ANYKERNEL_DIR/"
 
+echo "Packaging flashable ZIP..."
 cd "$ANYKERNEL_DIR"
 zip -r9 "../$ZIP_NAME" * -x '*.git*' '*.md' '*.placeholder'
 cd ..
 
-echo "Build complete!"
+# ---------------------------------------------
+# Completion
+# ---------------------------------------------
+BUILD_DURATION=$(( $(date +%s) - START_TIME ))
+echo
+echo "============================================="
+echo " Build Completed Successfully"
+echo "============================================="
 echo "Flashable ZIP: $ZIP_NAME"
+echo "Location: $SCRIPT_DIR/$ZIP_NAME"
+echo "Cores Utilized: $JOBS"
+echo "Build Duration: $BUILD_DURATION seconds"
+echo "============================================="
