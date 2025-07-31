@@ -8,10 +8,7 @@ crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scr
 ```
 crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/yaap.sh | bash"
 ```
-
-<h1 align="center"> 😏 Regular Scripts 🧐 </h1>
-
-# Kernel Command:
+# Infinity Command:
 ```
-curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Kernel/kernel.sh | bash
+crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/infinity.sh | bash"
 ```
