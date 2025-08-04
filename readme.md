@@ -12,3 +12,7 @@ crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scr
 ```
 crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/infinity.sh | bash"
 ```
+# Crdroid Command:
+```
+crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/crdroid.sh | bash"
+```
