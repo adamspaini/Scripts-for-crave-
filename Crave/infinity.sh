@@ -18,6 +18,7 @@ rm -rf vendor/bcr
 rm -rf hardware/xiaomi
 rm -rf packages/apps/ViPER4AndroidFX
 rm -rf prebuilts/calyx/datura
+rm -rf device/xiaomi/stone-kernel
 
 # Clone Device sources
 git clone https://github.com/mayuresh2543/device_xiaomi_stone_new.git -b infinity-16 --depth=1 device/xiaomi/stone
