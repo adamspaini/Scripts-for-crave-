@@ -20,7 +20,10 @@ echo "============================"
 echo "============================"
 
 rm -rf packages/apps/Updater
-git clone https://github.com/mayuresh2543/crdroid_packages_apps_Updater.git packages/apps/Updater
+git clone https://github.com/mayuresh2543/crdroid_packages_apps_Updater.git --depth=1 packages/apps/Updater
+
+rm -rf hardware/lineage/compat
+git clone https://github.com/mayuresh2543/android_hardware_lineage_compat.git --depth=1 hardware/lineage/compat
 echo "Custom sources synced"
 
 # Export
