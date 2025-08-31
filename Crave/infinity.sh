@@ -19,6 +19,7 @@ rm -rf hardware/xiaomi
 rm -rf packages/apps/ViPER4AndroidFX
 rm -rf prebuilts/calyx/datura
 rm -rf device/xiaomi/stone-kernel
+rm -rf vendor/priv-keys/keys
 
 # Clone Device sources
 git clone https://github.com/mayuresh2543/device_xiaomi_stone_new.git -b infinity-16 --depth=1 device/xiaomi/stone
@@ -29,6 +30,7 @@ git clone https://github.com/mayuresh2543/vendor_bcr.git --depth=1 vendor/bcr
 git clone https://github.com/LineageOS/android_hardware_xiaomi.git -b lineage-23.0 --depth=1 hardware/xiaomi
 git clone https://github.com/mayuresh2543/vendor_viper4.git --depth=1 packages/apps/ViPER4AndroidFX
 git clone https://github.com/mayuresh2543/prebuilts_calyx_datura.git --depth=1 prebuilts/calyx/datura
+git clone https://github.com/mayuresh2543/vendor_priv-keys_keys.git --depth=1 vendor/priv-keys/keys
 echo "============================"
 echo "Device sources clone success"
 echo "============================"
@@ -54,8 +56,6 @@ echo "====== Envsetup Done ======="
 # Lunch
 lunch infinity_stone-userdebug
 echo "============="
-
-m clean
 
 # Build rom
 m bacon
