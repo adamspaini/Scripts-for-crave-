@@ -14,23 +14,16 @@ rm -rf device/xiaomi/stone
 rm -rf vendor/xiaomi/stone
 rm -rf kernel/xiaomi/stone
 rm -rf hardware/dolby
-rm -rf vendor/bcr
 rm -rf hardware/xiaomi
 rm -rf packages/apps/ViPER4AndroidFX
-rm -rf prebuilts/calyx/datura
-rm -rf device/xiaomi/stone-kernel
-rm -rf vendor/priv-keys/keys
 
 # Clone Device sources
-git clone https://github.com/mayuresh2543/device_xiaomi_stone_new.git -b infinity-16 --depth=1 device/xiaomi/stone
+git clone https://github.com/mayuresh2543/device_xiaomi_stone_infinity.git --depth=1 device/xiaomi/stone
 git clone https://github.com/mayuresh2543/vendor_xiaomi_stone.git -b 16 --depth=1 vendor/xiaomi/stone
 git clone https://github.com/mayuresh2543/kernel_xiaomi_stone.git -b 16 --depth=1 kernel/xiaomi/stone
 git clone https://github.com/mayuresh2543/hardware_dolby.git -b sony-1.0 --depth=1 hardware/dolby
-git clone https://github.com/mayuresh2543/vendor_bcr.git --depth=1 vendor/bcr
 git clone https://github.com/LineageOS/android_hardware_xiaomi.git -b lineage-23.0 --depth=1 hardware/xiaomi
 git clone https://github.com/mayuresh2543/vendor_viper4.git --depth=1 packages/apps/ViPER4AndroidFX
-git clone https://github.com/mayuresh2543/prebuilts_calyx_datura.git --depth=1 prebuilts/calyx/datura
-git clone https://github.com/mayuresh2543/vendor_priv-keys_keys.git --depth=1 vendor/priv-keys/keys
 echo "============================"
 echo "Device sources clone success"
 echo "============================"
@@ -38,10 +31,6 @@ echo "============================"
 # Sync the repositories
 /opt/crave/resync.sh
 echo "============================"
-
-rm -rf packages/apps/Updater
-git clone https://github.com/mayuresh2543/infinity_packages_apps_Updater.git --depth=1 packages/apps/Updater
-echo "Custom sources synced"
 
 # Export
 export BUILD_USERNAME=mayuresh
@@ -58,4 +47,5 @@ lunch infinity_stone-userdebug
 echo "============="
 
 # Build rom
-m bacon
+WITH_GMS=false m bacon
+WITH_GMS=true m bacon
