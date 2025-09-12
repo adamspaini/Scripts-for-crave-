@@ -1,15 +1,16 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
+rm -rf prebuilts/clang/host/linux-x86
 
 # Rom source repo
-repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs
+repo init --git-lfs --no-clone-bundle -u ssh://git@github.com/LineageOS/android.git -b refs/changes/42/436442/28
 echo "=================="
 echo "Repo init success"
 echo "=================="
 
 # Clone local_manifests repository
-git clone -b lineage-15 https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
+git clone -b lineage-16 https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
 echo "============================"
 echo "Local manifest clone success"
 echo "============================"
@@ -17,12 +18,6 @@ echo "============================"
 # Sync the repositories
 /opt/crave/resync.sh
 echo "============================"
-
-rm -rf packages/apps/Updater
-git clone https://github.com/Mayuresh2543/lineage_packages_apps_Updater.git packages/apps/Updater
-rm -rf packages/apps/Trebuchet
-git clone https://github.com/Mayuresh2543/lineage_packages_apps_Trebuchet.git packages/apps/Trebuchet
-echo "Custom sources synced"
 
 # Export
 export BUILD_USERNAME=mayuresh
@@ -35,7 +30,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_stone-bp1a-userdebug
+lunch lineage_stone-bp2a-userdebug
 echo "============="
 
 # Build rom
