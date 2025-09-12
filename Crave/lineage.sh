@@ -4,7 +4,7 @@ rm -rf .repo/local_manifests/
 rm -rf prebuilts/clang/host/linux-x86
 
 # Rom source repo
-repo init --git-lfs --no-clone-bundle -u ssh://git@github.com/LineageOS/android.git -b refs/changes/42/436442/28
+repo init --git-lfs --no-clone-bundle -u https://git@github.com/LineageOS/android.git -b refs/changes/42/436442/28
 echo "=================="
 echo "Repo init success"
 echo "=================="
