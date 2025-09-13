@@ -19,6 +19,9 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
+rm -rf vendor/lineage
+git clone https://github.com/mayuresh2543/android_vendor_lineage.git --depth=1 vendor/lineage
+
 # Export
 export BUILD_USERNAME=mayuresh
 export BUILD_HOSTNAME=crave
