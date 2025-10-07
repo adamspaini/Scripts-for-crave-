@@ -36,5 +36,8 @@ echo "====== Envsetup Done ======="
 lunch lineage_stone-bp2a-userdebug
 echo "============="
 
+# Install clean
+m installclean
+
 # Build rom
 m bacon
