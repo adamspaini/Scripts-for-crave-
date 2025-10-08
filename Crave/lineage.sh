@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
-rm -rf prebuilts/clang/host/linux-x86
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
