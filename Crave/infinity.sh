@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
-rm -rf prebuilts/clang/host/linux-x86
 
 # Rom source repo
 repo init --no-repo-verify --git-lfs -u https://github.com/ProjectInfinity-X/manifest -b 16 -g default,-mips,-darwin,-notdefault
@@ -45,6 +44,9 @@ echo "====== Envsetup Done ======="
 # Lunch
 lunch infinity_stone-userdebug
 echo "============="
+
+# Install clean
+m installclean
 
 # Build rom
 m bacon
