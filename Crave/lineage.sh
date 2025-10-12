@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
+rm -rf vendor/lineage
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
@@ -18,8 +19,8 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
-rm -rf vendor/lineage
-git clone https://github.com/mayuresh2543/android_vendor_lineage.git --depth=1 vendor/lineage
+#rm -rf vendor/lineage
+#git clone https://github.com/mayuresh2543/android_vendor_lineage.git --depth=1 vendor/lineage
 
 rm -rf packages/apps/Updater
 git clone https://github.com/mayuresh-releases/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
