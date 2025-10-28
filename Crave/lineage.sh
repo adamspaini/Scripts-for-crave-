@@ -32,7 +32,7 @@ rm -rf frameworks/av
 git clone https://github.com/mayuresh2543/lineage_frameworks_av.git --depth=1 frameworks/av
 
 rm -rf device/xiaomi/stone
-git clone https://github.com/mayuresh2543/device_xiaomi_stone_new.git -b 16-temp device/xiaomi/stone
+git clone https://github.com/mayuresh2543/device_xiaomi_stone_rebase.git device/xiaomi/stone
 
 rm -rf kernel/xiaomi/stone
 git clone https://github.com/mayuresh2543/kernel_xiaomi_stone_rebase.git --depth=1 kernel/xiaomi/stone
