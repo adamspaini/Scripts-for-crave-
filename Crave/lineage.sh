@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
-rm -rf vendor/lineage
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
@@ -31,11 +30,11 @@ git clone https://github.com/mayuresh2543/lineage_packages_apps_Launcher3.git --
 rm -rf frameworks/av
 git clone https://github.com/mayuresh2543/lineage_frameworks_av.git --depth=1 frameworks/av
 
-rm -rf device/xiaomi/stone
-git clone https://github.com/mayuresh2543/device_xiaomi_stone_rebase.git device/xiaomi/stone
+rm -rf frameworks/base
+git clone https://github.com/mayuresh2543/lineage_frameworks_base.git --depth=1 frameworks/base
 
-rm -rf kernel/xiaomi/stone
-git clone https://github.com/mayuresh2543/kernel_xiaomi_stone_rebase.git --depth=1 kernel/xiaomi/stone
+rm -rf packages/apps/Settings
+git clone https://github.com/mayuresh2543/lineage_packages_apps_Settings.git --depth=1 packages/apps/Settings
 
 echo "Custom sources synced"
 
