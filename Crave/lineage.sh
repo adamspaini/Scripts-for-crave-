@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
+rm -rf frameworks/av
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
@@ -27,8 +28,8 @@ git clone https://github.com/mayuresh-releases/lineage_packages_apps_Updater.git
 rm -rf packages/apps/Launcher3
 git clone https://github.com/mayuresh2543/lineage_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
 
-rm -rf frameworks/av
-git clone https://github.com/mayuresh2543/lineage_frameworks_av.git --depth=1 frameworks/av
+#rm -rf frameworks/av
+#git clone https://github.com/mayuresh2543/lineage_frameworks_av.git --depth=1 frameworks/av
 
 rm -rf frameworks/base
 git clone https://github.com/mayuresh2543/lineage_frameworks_base.git --depth=1 frameworks/base
