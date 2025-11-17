@@ -18,6 +18,9 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
+rm -rf hardware/qcom-caf/common
+git clone https://github.com/mayuresh2543/android_hardware_qcom-caf_common.git hardware/qcom-caf/common
+
 # Export
 export BUILD_USERNAME=mayuresh
 export BUILD_HOSTNAME=crave
