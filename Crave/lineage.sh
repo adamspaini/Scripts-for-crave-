@@ -3,13 +3,13 @@
 rm -rf .repo/local_manifests/
 
 # Rom source repo
-repo init -u https://github.com/ProjectMatrixx/android.git -b 16.0 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
 
 # Clone local_manifests repository
-git clone -b 16-vanilla https://github.com/buildbot-stone-devs/local_manifest_matrixx.git .repo/local_manifests
+git clone -b lineage-16 https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
 echo "============================"
 echo "Local manifest clone success"
 echo "============================"
@@ -18,30 +18,42 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
+rm -rf vendor/lineage
+git clone https://github.com/mayuresh2543/android_vendor_lineage.git --depth=1 vendor/lineage
+
+rm -rf packages/apps/Updater
+git clone https://github.com/mayuresh2543/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
+
+rm -rf packages/apps/Launcher3
+git clone https://github.com/mayuresh2543/lineage_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
+
+#rm -rf frameworks/av
+#git clone https://github.com/mayuresh2543/lineage_frameworks_av.git --depth=1 frameworks/av
+
+rm -rf frameworks/base
+git clone https://github.com/mayuresh2543/lineage_frameworks_base.git --depth=1 frameworks/base
+
 rm -rf packages/apps/Settings
-git clone https://github.com/mayuresh2543/matrixx_packages_apps_Settings.git packages/apps/Settings
+git clone https://github.com/mayuresh2543/lineage_packages_apps_Settings.git --depth=1 packages/apps/Settings
+
+echo "Custom sources synced"
 
 # Export
-export BUILD_USERNAME=mayureshxKhnome
-export BUILD_HOSTNAME=nobody
-export TZ="Europe/Vilnius"
+export BUILD_USERNAME=mayuresh
+export BUILD_HOSTNAME=crave
+export TZ="Asia/India"
 echo "======= Export Done ======"
-
-# Sign
-cd vendor/lineage-priv/keys
-chmod +x ./syslink.sh
-././syslink.sh
-cd ../../..
-echo "Signing success"
 
 # Set up build environment
 . build/envsetup.sh
 echo "====== Envsetup Done ======="
 
+# Lunch
 lunch lineage_stone-bp2a-userdebug
+echo "============="
 
+# Install clean
 m installclean
 
+# Build rom
 m bacon
-
-WITH_GMS=true WITH_QS=true m bacon
