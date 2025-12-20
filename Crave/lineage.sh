@@ -19,22 +19,19 @@ echo "============================"
 echo "============================"
 
 rm -rf vendor/lineage
-git clone https://github.com/mayuresh2543/android_vendor_lineage.git --depth=1 vendor/lineage
+git clone https://github.com/mayuresh-sources/android_vendor_lineage.git --depth=1 vendor/lineage
 
 rm -rf packages/apps/Updater
-git clone https://github.com/mayuresh2543/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
+git clone https://github.com/mayuresh-sources/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
 
 rm -rf packages/apps/Launcher3
-git clone https://github.com/mayuresh2543/lineage_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
-
-#rm -rf frameworks/av
-#git clone https://github.com/mayuresh2543/lineage_frameworks_av.git --depth=1 frameworks/av
+git clone https://github.com/mayuresh-sources/lineage_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
 
 rm -rf frameworks/base
-git clone https://github.com/mayuresh2543/lineage_frameworks_base.git --depth=1 frameworks/base
+git clone https://github.com/mayuresh-sources/lineage1_frameworks_base.git --depth=1 frameworks/base
 
 rm -rf packages/apps/Settings
-git clone https://github.com/mayuresh2543/lineage_packages_apps_Settings.git --depth=1 packages/apps/Settings
+git clone https://github.com/mayuresh-sources/lineage_packages_apps_Settings.git --depth=1 packages/apps/Settings
 
 echo "Custom sources synced"
 
