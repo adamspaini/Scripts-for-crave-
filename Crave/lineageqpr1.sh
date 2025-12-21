@@ -3,13 +3,13 @@
 rm -rf .repo/local_manifests/
 
 # Rom source repo
-repo init -u https://github.com/Evolution-X/manifest -b bka-q1 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.1 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
 
 # Clone local_manifests repository
-git clone -b evo-qpr1 https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
+git clone -b lineage-16 https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
 echo "============================"
 echo "Local manifest clone success"
 echo "============================"
@@ -17,6 +17,14 @@ echo "============================"
 # Sync the repositories
 /opt/crave/resync.sh
 echo "============================"
+
+rm -rf packages/apps/Updater
+git clone https://github.com/mayuresh-sources/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
+
+rm -rf packages/apps/Launcher3
+git clone https://github.com/mayuresh2543/qpr1_lineage_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
+
+echo "Custom sources synced"
 
 # Export
 export BUILD_USERNAME=mayuresh
@@ -36,4 +44,4 @@ echo "============="
 m installclean
 
 # Build rom
-m evolution
+m bacon
