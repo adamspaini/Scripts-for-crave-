@@ -1,6 +1,8 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
+rm -rf frameworks/base
+rm -rf packages/apps/Settings
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.1 --git-lfs
@@ -24,11 +26,11 @@ git clone https://github.com/mayuresh-sources/lineage_packages_apps_Updater.git 
 rm -rf packages/apps/Launcher3
 git clone https://github.com/mayuresh2543/lineage-qpr1_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
 
-rm -rf frameworks/base
-git clone https://github.com/mayuresh2543/lineage-qpr1_frameworks_base.git --depth=1 frameworks/base
+#rm -rf frameworks/base
+#git clone https://github.com/mayuresh2543/lineage-qpr1_frameworks_base.git --depth=1 frameworks/base
 
-rm -rf packages/apps/Settings
-git clone https://github.com/mayuresh2543/lineage-qpr1_packages_apps_Settings.git --depth=1 packages/apps/Settings
+#rm -rf packages/apps/Settings
+#git clone https://github.com/mayuresh2543/lineage-qpr1_packages_apps_Settings.git --depth=1 packages/apps/Settings
 
 echo "Custom sources synced"
 
