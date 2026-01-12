@@ -1,8 +1,8 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
-rm -rf frameworks/base
-rm -rf packages/apps/Settings
+#rm -rf frameworks/base
+#rm -rf packages/apps/Settings
 
 # Rom source repo
 repo init -u https://github.com/LineageOS/android.git -b lineage-23.1 --git-lfs
