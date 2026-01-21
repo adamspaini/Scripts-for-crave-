@@ -5,7 +5,7 @@ rm -rf .repo/local_manifests/
 #rm -rf packages/apps/Settings
 
 # Rom source repo
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.1 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.2 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
@@ -45,7 +45,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_stone-bp3a-userdebug
+lunch lineage_stone-bp4a-userdebug
 echo "============="
 
 # Install clean
