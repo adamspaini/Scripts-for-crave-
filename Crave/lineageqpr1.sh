@@ -23,8 +23,8 @@ echo "============================"
 rm -rf packages/apps/Updater
 git clone https://github.com/mayuresh-sources/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
 
-rm -rf packages/apps/Launcher3
-git clone https://github.com/mayuresh2543/lineage-qpr1_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
+#rm -rf packages/apps/Launcher3
+#git clone https://github.com/mayuresh2543/lineage-qpr1_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
 
 #rm -rf frameworks/base
 #git clone https://github.com/mayuresh2543/lineage-qpr1_frameworks_base.git --depth=1 frameworks/base
