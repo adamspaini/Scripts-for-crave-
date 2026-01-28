@@ -19,7 +19,7 @@ rm -rf packages/apps/ViPER4AndroidFX
 git clone https://github.com/mayuresh2543/vendor_xiaomi_stone.git -b 16.2 --depth=1 vendor/xiaomi/stone
 #git clone https://github.com/mayuresh2543/kernel_xiaomi_stone_rebase.git -b 16 --depth=1 kernel/xiaomi/stone
 git clone https://github.com/mayuresh-sources/hardware_dolby.git -b sony-1.0 --depth=1 hardware/dolby
-git clone https://github.com/LineageOS/android_hardware_xiaomi.git -b lineage-23.0 --depth=1 hardware/xiaomi
+git clone https://github.com/LineageOS/android_hardware_xiaomi.git -b lineage-23.2 --depth=1 hardware/xiaomi
 git clone https://github.com/mayuresh-sources/packages_apps_ViPER4AndroidFX.git --depth=1 packages/apps/ViPER4AndroidFX
 echo "============================"
 echo "Device sources clone success"
