@@ -3,7 +3,7 @@
 rm -rf .repo/local_manifests/
 
 # Rom source repo
-repo init -u https://github.com/LineageOS/android.git -b lineage-23.0 --git-lfs
+repo init -u https://github.com/LineageOS/android.git -b lineage-23.2 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
@@ -18,20 +18,14 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
-rm -rf vendor/lineage
-git clone https://github.com/mayuresh-sources/android_vendor_lineage.git --depth=1 vendor/lineage
-
 rm -rf packages/apps/Updater
-git clone https://github.com/mayuresh-sources/lineage_packages_apps_Updater.git --depth=1 packages/apps/Updater
+git clone https://github.com/mayuresh-sources/lineage_qpr2_packages_apps_Updater.git --depth=1 packages/apps/Updater
 
 rm -rf packages/apps/Launcher3
-git clone https://github.com/mayuresh-sources/lineage_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
+git clone https://github.com/mayuresh-sources/lineage_qpr2_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
 
 rm -rf frameworks/base
-git clone https://github.com/mayuresh-sources/lineage1_frameworks_base.git --depth=1 frameworks/base
-
-rm -rf packages/apps/Settings
-git clone https://github.com/mayuresh-sources/lineage_packages_apps_Settings.git --depth=1 packages/apps/Settings
+git clone https://github.com/mayuresh-sources/lineage_qpr2_frameworks_base.git --depth=1 frameworks/base
 
 echo "Custom sources synced"
 
@@ -46,7 +40,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_stone-bp2a-userdebug
+lunch lineage_stone-bp4a-userdebug
 echo "============="
 
 # Install clean
