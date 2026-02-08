@@ -9,6 +9,8 @@ echo "Repo init success"
 echo "=================="
 
 # Remove existing sources
+rm -rf device/xiaomi/stone
+rm -rf kernel/xiaomi/stone
 rm -rf vendor/xiaomi/stone
 rm -rf hardware/dolby
 rm -rf hardware/xiaomi
