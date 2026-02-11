@@ -33,6 +33,9 @@ git clone https://github.com/mayuresh2543/lineage_a15_frameworks_base.git --dept
 rm -rf frameworks/native
 git clone https://github.com/mayuresh2543/lineage_a15_frameworks_native.git --depth=1 frameworks/native
 
+rm -rf bionic
+git clone https://github.com/mayuresh-sources/lineage_a15_bionic.git --depth=1 bionic
+
 echo "Custom sources synced"
 
 # Export
