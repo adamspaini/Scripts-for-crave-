@@ -46,7 +46,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_stone-bp2a-userdebug
+lunch lineage_stone-bp1a-userdebug
 echo "============="
 
 # Install clean
