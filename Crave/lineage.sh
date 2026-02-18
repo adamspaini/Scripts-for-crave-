@@ -24,11 +24,17 @@ git clone https://github.com/mayuresh-sources/lineage_qpr2_packages_apps_Updater
 rm -rf packages/apps/Launcher3
 git clone https://github.com/mayuresh-sources/lineage_qpr2_packages_apps_Launcher3.git --depth=1 packages/apps/Launcher3
 
-rm -rf packages/apps/ThemePicker
-git clone https://github.com/mayuresh-sources/lineage_qpr2_packages_apps_ThemePicker.git --depth=1 packages/apps/ThemePicker
+rm -rf frameworks/native
+git clone https://github.com/mayuresh-sources/lineage_qpr2_frameworks_native.git --depth=1 frameworks/native
 
 rm -rf frameworks/base
 git clone https://github.com/mayuresh-sources/lineage_qpr2_frameworks_base.git --depth=1 frameworks/base
+
+rm -rf bionic
+git clone https://github.com/mayuresh-sources/lineage_qpr2_bionic.git --depth=1 bionic
+
+rm -rf art
+git clone https://github.com/mayuresh-sources/lineage_qpr2_art.git --depth=1 art
 
 echo "Custom sources synced"
 
