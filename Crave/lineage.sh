@@ -34,7 +34,7 @@ rm -rf bionic
 git clone https://github.com/mayuresh-sources/lineage_qpr2_bionic.git --depth=1 bionic
 
 rm -rf art
-git clone https://github.com/mayuresh-sources/lineage_qpr2_art.git --depth=1 art
+git clone https://github.com/mayuresh-sources/lineage_qpr2_from-aosp_art.git --depth=1 art
 
 echo "Custom sources synced"
 
