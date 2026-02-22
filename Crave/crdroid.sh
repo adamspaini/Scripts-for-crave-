@@ -1,7 +1,6 @@
 #!/bin/bash
 
 rm -rf .repo/local_manifests/
-rm -rf prebuilts/clang/host/linux-x86
 
 # Rom source repo
 repo init -u https://github.com/crdroidandroid/android.git -b 16.0 --git-lfs --no-clone-bundle
@@ -20,7 +19,7 @@ echo "============================"
 echo "============================"
 
 rm -rf packages/apps/Updater
-git clone https://github.com/mayuresh2543/crdroid_packages_apps_Updater.git --depth=1 packages/apps/Updater
+git clone https://github.com/mayuresh-sources/crdroid_packages_apps_Updater.git --depth=1 packages/apps/Updater
 echo "Custom sources synced"
 
 # Export
