@@ -36,6 +36,9 @@ git clone https://github.com/mayuresh2543/lineage_a15_frameworks_native.git --de
 rm -rf bionic
 git clone https://github.com/mayuresh-sources/lineage_a15_bionic.git --depth=1 bionic
 
+rm -rf frameworks/libs/systemui
+git clone https://github.com/mayuresh2543/lineage_a15_frameworks_libs_systemui.git --depth=1 frameworks/libs/systemui
+
 echo "Custom sources synced"
 
 # Export
