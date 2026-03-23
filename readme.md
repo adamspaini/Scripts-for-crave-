@@ -12,9 +12,9 @@ crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scr
 ```
 crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/yaap.sh | bash"
 ```
-# Infinity Command:
+# PixelOS Command:
 ```
-crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/infinity.sh | bash"
+crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/pixelos.sh | bash"
 ```
 # Crdroid Command:
 ```
