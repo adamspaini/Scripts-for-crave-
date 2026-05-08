@@ -16,7 +16,7 @@ crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scr
 ```
 crave run --no-patch -- "curl https://raw.githubusercontent.com/prabhu992/Scripts/refs/heads/16/Crave/pixelos.sh | bash"
 ```
-# Crdroid Command:
+# AlphaDroid Command:
 ```
-crave run --no-patch -- "curl https://raw.githubusercontent.com/Mayuresh2543/Scripts/refs/heads/16/Crave/crdroid.sh | bash"
+crave run --no-patch -- "curl https://raw.githubusercontent.com/prabhu992/Scripts/refs/heads/16/Crave/alpha.sh | bash"
 ```
