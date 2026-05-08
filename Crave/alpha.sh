@@ -3,7 +3,7 @@
 rm -rf .repo/local_manifests/
 
 # Rom source repo
-repo init -u https://github.com/crdroidandroid/android.git -b 16.0 --git-lfs --no-clone-bundle
+repo init -u https://github.com/alphadroid-project/manifest -b alpha-16.2 --git-lfs
 echo "=================="
 echo "Repo init success"
 echo "=================="
@@ -18,10 +18,16 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
+# Signing keys
+rm -rf vendor/alpha-priv/keys
+git clone https://github.com/alphadroid-project/vendor_alpha-priv_keys vendor/alpha-priv/keys
+echo "============================"
+
 # Export
-export BUILD_USERNAME=mayuresh
+export BUILD_USERNAME=NeoPrabhX
 export BUILD_HOSTNAME=crave
-export TZ="Asia/India"
+export TZ="Asia/Kolkata"
+export ALPHA_MAINTAINER="NeoPrabhX"
 echo "======= Export Done ======"
 
 # Set up build environment
