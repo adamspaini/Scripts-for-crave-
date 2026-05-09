@@ -18,6 +18,12 @@ echo "============================"
 /opt/crave/resync.sh
 echo "============================"
 
+# Clone device tree repository 
+git clone https://github.com/prabhu992/device_xiaomi_stone_new
+echo "============================"
+echo "Device tree clone success"
+echo "============================"
+
 # Signing keys
 rm -rf vendor/alpha-priv/keys
 git clone https://github.com/alphadroid-project/vendor_alpha-priv_keys vendor/alpha-priv/keys
