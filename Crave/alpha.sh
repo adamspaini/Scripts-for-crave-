@@ -19,7 +19,7 @@ echo "============================"
 echo "============================"
 
 # Clone device tree repository 
-git clone https://github.com/prabhu992/device_xiaomi_stone_new
+git clone https://github.com/prabhu992/device_xiaomi_stone_new device/xiaomi/stone
 echo "============================"
 echo "Device tree clone success"
 echo "============================"
