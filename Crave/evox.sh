@@ -25,7 +25,7 @@ git clone https://rakmoparte@bitbucket.org/ram-unlok/vendor_gcam.git vendor/gcam
 echo "============================"
 
 # Export
-export BUILD_USERNAME=adam
+export BUILD_USERNAME=Adam
 export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
 echo "======= Export Done ======"
