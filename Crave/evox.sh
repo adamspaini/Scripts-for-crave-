@@ -8,6 +8,12 @@ echo "=================="
 echo "Repo init success"
 echo "=================="
 
+# Clone local_manifests repository
+git clone -b evox-qpr2 https://github.com/adamspaini/adamspaini-local_manifest.xml.git .repo/local_manifests
+echo "============================"
+echo "Local manifest clone success"
+echo "============================"
+
 # Clone Device sources
 git clone https://github.com/Digimend-X-Rodin/android_device_xiaomi_rodin.git device/xiaomi/rodin
 git clone --depth=1 https://gitlab.com/ram-unlok/vendor_xiaomi_rodin.git vendor/xiaomi/rodin
