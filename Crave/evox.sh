@@ -8,21 +8,24 @@ echo "=================="
 echo "Repo init success"
 echo "=================="
 
-# Clone local_manifests repository
-git clone -b evo-qpr1 https://github.com/Mayuresh2543/local_manifests.git .repo/local_manifests
-echo "============================"
-echo "Local manifest clone success"
-echo "============================"
+# Clone Device sources
+git clone https://github.com/Digimend-X-Rodin/android_device_xiaomi_rodin.git device/xiaomi/rodin
+git clone --depth=1 https://gitlab.com/ram-unlok/vendor_xiaomi_rodin.git vendor/xiaomi/rodin
+git clone https://github.com/Digimend-X-Rodin/android_device_xiaomi_rodin-kernel.git device/xiaomi/rodin-kernel
+git clone https://github.com/swiitch-OFF-Lab/hardware_dolby.git -b sony-1.5 hardware/dolby
+git clone https://github.com/Digimend-X-Rodin/android_hardware_xiaomi.git hardware/xiaomi
+git clone https://github.com/Digimend-X-Rodin/android_hardware_mediatek.git hardware/mediatek
+git clone https://github.com/Digimend-X-Rodin/android_device_mediatek_sepolicy_vndr.git device/mediatek/sepolicy_vndr
+git clone https://gitlab.com/ram-unlok/bcr.git vendor/bcr
+git clone https://gitlab.com/ram-unlok/vendor_PixelPlay.git vendor/PixelPlay
+git clone https://rakmoparte@bitbucket.org/ram-unlok/vendor_gcam.git vendor/gcam
 
 # Sync the repositories
 /opt/crave/resync.sh
 echo "============================"
 
-rm -rf hardware/qcom-caf/common
-git clone https://github.com/mayuresh2543/android_hardware_qcom-caf_common.git hardware/qcom-caf/common
-
 # Export
-export BUILD_USERNAME=mayuresh
+export BUILD_USERNAME=adam
 export BUILD_HOSTNAME=crave
 export TZ="Asia/India"
 echo "======= Export Done ======"
@@ -32,7 +35,7 @@ echo "======= Export Done ======"
 echo "====== Envsetup Done ======="
 
 # Lunch
-lunch lineage_stone-bp3a-userdebug
+lunch lineage_rodin-bp4a-userdebug
 echo "============="
 
 # Install clean
